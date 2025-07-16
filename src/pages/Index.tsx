@@ -27,7 +27,7 @@ const Index = () => {
   const [waahCount] = useState(47);
   const [chapatiDebt] = useState(3);
   const [memoriesCount] = useState(12);
-  const [showMainApp, setShowMainApp] = useState(false);
+  const [showMainApp, setShowMainApp] = useState(true);
 
   const handleBirthdayComplete = () => {
     setShowMainApp(true);
