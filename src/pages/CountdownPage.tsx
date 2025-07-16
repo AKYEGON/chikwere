@@ -66,11 +66,11 @@ const CountdownPage = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ 
-          backgroundImage: `url(/lovable-uploads/af0855aa-7a69-4701-b68c-d707e6424980.png)`,
+          backgroundImage: `url(/lovable-uploads/0aee5898-7305-42cc-a412-f053a277bc08.png)`,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-pink-900/70 via-purple-900/60 to-rose-900/70 backdrop-blur-[1px]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-900/80 via-purple-900/70 to-rose-900/80 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
       </div>
 
       {/* Floating Hearts and Stars */}
@@ -99,10 +99,10 @@ const CountdownPage = () => {
 
       {/* Navigation */}
       <div className="relative z-20 p-6">
-        <Link to="/">
+        <Link to="/love-story">
           <Button variant="ghost" className="text-white/80 hover:text-white hover:bg-white/10 backdrop-blur-sm">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
+            <Heart className="w-4 h-4 mr-2" fill="currentColor" />
+            Explore Our Love Story
           </Button>
         </Link>
       </div>
@@ -198,7 +198,7 @@ const CountdownPage = () => {
             <p className="text-white/70 text-lg">
               Get ready for the most magical day, my beautiful Chikwere ✨
             </p>
-            <Link to="/">
+            <Link to="/love-story">
               <Button 
                 size="lg" 
                 className="bg-gradient-to-r from-pink-500 via-purple-500 to-rose-500 hover:from-pink-600 hover:via-purple-600 hover:to-rose-600 text-white px-8 py-4 text-lg shadow-2xl transform hover:scale-110 transition-all duration-300 rounded-2xl font-semibold border-0"

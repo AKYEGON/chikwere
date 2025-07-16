@@ -1,6 +1,7 @@
 
 import { Heart, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const heroImage = "/lovable-uploads/e4a19364-5d07-4efa-a090-43818c662e3a.png";
 
@@ -46,10 +47,12 @@ const HeroSection = () => {
               <Heart className="w-5 h-5" fill="currentColor" />
               Explore Our Love Story
             </Button>
-            <Button variant="outline" size="lg" className="bg-white/10 border-white/30 text-white hover:bg-white/20">
-              <Sparkles className="w-5 h-5" />
-              See Your Birthday Countdown
-            </Button>
+            <Link to="/">
+              <Button variant="outline" size="lg" className="bg-white/10 border-white/30 text-white hover:bg-white/20">
+                <Sparkles className="w-5 h-5" />
+                See Your Birthday Countdown
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
