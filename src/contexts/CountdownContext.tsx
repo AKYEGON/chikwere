@@ -35,6 +35,7 @@ export const CountdownProvider: React.FC<{ children: ReactNode }> = ({ children 
 
     const calculateTimeLeft = () => {
       const now = new Date();
+      // Set birthday to tomorrow at midnight for testing
       const birthday = new Date();
       birthday.setDate(birthday.getDate() + 1);
       birthday.setHours(0, 0, 0, 0);
@@ -50,7 +51,9 @@ export const CountdownProvider: React.FC<{ children: ReactNode }> = ({ children 
         setTimeLeft({ days, hours, minutes, seconds });
       } else {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        setCountdownComplete(true);
+        if (!isCountdownComplete) {
+          setCountdownComplete(true);
+        }
       }
     };
 
@@ -58,7 +61,7 @@ export const CountdownProvider: React.FC<{ children: ReactNode }> = ({ children 
     const timer = setInterval(calculateTimeLeft, 1000);
     
     return () => clearInterval(timer);
-  }, []);
+  }, [isCountdownComplete]);
 
   const setCountdownComplete = (complete: boolean) => {
     setIsCountdownComplete(complete);

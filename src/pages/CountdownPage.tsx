@@ -134,7 +134,7 @@ const CountdownPage = () => {
             </span>
           </p>
 
-          {/* Countdown Timer - Only show if not complete */}
+          {/* Countdown Timer - Always show countdown if not complete */}
           {!isCountdownComplete && !unlocked && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-12 max-w-4xl mx-auto">
               <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-6 md:p-8 transform hover:scale-105 transition-all duration-300 shadow-2xl">
