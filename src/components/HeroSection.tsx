@@ -1,3 +1,4 @@
+
 import { Heart, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 const heroImage = "/lovable-uploads/e4a19364-5d07-4efa-a090-43818c662e3a.png";
@@ -35,7 +36,7 @@ const HeroSection = () => {
           </h1>
           
           <p className="text-xl md:text-2xl text-white/90 mb-8 font-light leading-relaxed">
-            A magical space where every <span className="waah-highlight">Waah</span> moment,
+            A magical space where every <span className="heartfelt-highlight">sweet moment</span>,
             every dream, and every piece of our love story lives forever
           </p>
           
@@ -46,7 +47,7 @@ const HeroSection = () => {
             </Button>
             <Button variant="outline" size="lg" className="bg-white/10 border-white/30 text-white hover:bg-white/20">
               <Sparkles className="w-5 h-5" />
-              Add a Waah Moment
+              Add a Sweet Moment
             </Button>
           </div>
         </div>

@@ -39,7 +39,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 const Index = () => {
-  const [waahCount] = useState(47);
+  const [sweetMomentsCount] = useState(47);
   const [chapatiDebt] = useState(3);
   const [memoriesCount] = useState(12);
   const [showMainApp, setShowMainApp] = useState(true);
@@ -54,7 +54,7 @@ const Index = () => {
       mood: "radiant"
     },
     {
-      message: "I love how you say 'waah' - it's become our special language of love 💕",
+      message: "I love your sweet laughter - it's become the melody of my heart 💕",
       day: "Day 2", 
       mood: "playful"
     },
@@ -64,7 +64,7 @@ const Index = () => {
       mood: "proud"
     },
     {
-      message: "I can't wait to teach baby Alpha to say 'waah' just like mama 👶✨",
+      message: "I can't wait to teach baby Alpha to say 'mama' in your sweet voice 👶✨",
       day: "Day 4",
       mood: "dreamy"
     },
@@ -77,6 +77,16 @@ const Index = () => {
       message: "Your smile is my favorite work of art, painted fresh every morning 🎨💚",
       day: "Day 6",
       mood: "artistic"
+    },
+    {
+      message: "In your eyes, I see our entire future filled with love and happiness ✨",
+      day: "Day 7",
+      mood: "dreamy"
+    },
+    {
+      message: "Your gentle touch has the power to heal any wound in my soul 💖",
+      day: "Day 8",
+      mood: "tender"
     }
   ];
 
@@ -108,6 +118,7 @@ const Index = () => {
       case "dreamy": return "from-accent/15 to-primary/20";
       case "romantic": return "from-primary/30 to-accent/25";
       case "artistic": return "from-secondary/20 to-primary/15";
+      case "tender": return "from-primary/25 to-secondary/20";
       default: return "from-primary/20 to-accent/15";
     }
   };
@@ -133,8 +144,8 @@ const Index = () => {
               <blockquote className="text-xl md:text-2xl font-display font-medium text-foreground mb-10 leading-relaxed italic">
                 "This digital sanctuary is dedicated to YOU - the woman who transforms ordinary moments into extraordinary memories.
                 From your triumphant ugali mastery that filled my heart with pride, to every sweet 
-                <span className="heartfelt-highlight mx-2 animate-sparkle">Waah</span> 
-                that escapes your lips like music, you are my everything.
+                <span className="heartfelt-highlight mx-2 animate-sparkle">smile</span> 
+                that lights up my world like sunshine, you are my everything.
                 <br /><br />
                 Welcome to our story, my beloved future wife.
                 <br />
@@ -224,8 +235,8 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div className="stagger-love-animation" style={{ animationDelay: '0.1s' }}>
               <StatsCard 
-                title="Waah Moments"
-                value={waahCount}
+                title="Sweet Moments"
+                value={sweetMomentsCount}
                 subtitle="Pure magic captured ✨💫"
                 icon={Sparkles}
                 className="love-card interactive-love-card shadow-romantic-glow"
@@ -467,7 +478,7 @@ const Index = () => {
             </h2>
             <p className="text-muted-foreground text-2xl md:text-3xl mb-16 leading-relaxed max-w-4xl mx-auto">
               In this sacred digital space where love blooms eternal, where every 
-              <span className="heartfelt-highlight mx-2">Waah</span> 
+              <span className="heartfelt-highlight mx-2">smile</span> 
               moment becomes a prayer of gratitude, and where two hearts beat as one beautiful symphony. 
               This is our sanctuary, our love letter to the universe, our promise to forever choose each other.
             </p>
@@ -484,7 +495,7 @@ const Index = () => {
                   Made with infinite love for my Chikwere 💙💚✨
                 </p>
                 <p className="text-lg text-muted-foreground mt-2">
-                  Future mama of Alpha, queen of my heart, waah-moment creator
+                  Future mama of Alpha, queen of my heart, bringer of smiles
                 </p>
               </div>
             </div>
