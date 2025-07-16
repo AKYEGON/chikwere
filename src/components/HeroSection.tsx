@@ -1,6 +1,7 @@
 
 import { Heart, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
 const heroImage = "/lovable-uploads/e4a19364-5d07-4efa-a090-43818c662e3a.png";
 
 const HeroSection = () => {
@@ -29,25 +30,25 @@ const HeroSection = () => {
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         <div className="animate-fade-in-up">
           <h1 className="text-5xl md:text-7xl font-display font-bold text-white mb-6">
-            Welcome to{" "}
+            For My Beloved{" "}
             <span className="bg-gradient-to-r from-white to-primary bg-clip-text text-transparent">
-              Our Little World
+              Chikwere
             </span>
           </h1>
           
           <p className="text-xl md:text-2xl text-white/90 mb-8 font-light leading-relaxed">
-            A magical space where every <span className="heartfelt-highlight">sweet moment</span>,
-            every dream, and every piece of our love story lives forever
+            A digital love letter dedicated to my beautiful girlfriend, 
+            my childhood crush who became my <span className="heartfelt-highlight">everything</span>
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button variant="romantic" size="lg" className="px-8">
               <Heart className="w-5 h-5" fill="currentColor" />
-              Explore Our Memories
+              Explore Our Love Story
             </Button>
             <Button variant="outline" size="lg" className="bg-white/10 border-white/30 text-white hover:bg-white/20">
               <Sparkles className="w-5 h-5" />
-              Add a Sweet Moment
+              See Your Birthday Countdown
             </Button>
           </div>
         </div>

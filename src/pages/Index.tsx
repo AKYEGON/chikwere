@@ -1,292 +1,203 @@
 
 import { useState, useEffect } from "react";
 import { 
-  Camera, 
   Heart, 
-  BookOpen, 
-  Target, 
+  Star, 
   Sparkles, 
-  ChefHat, 
-  Baby, 
-  GraduationCap,
-  Trophy,
+  Calendar, 
+  Camera, 
+  BookOpen, 
+  MapPin, 
+  Coffee, 
   Clock,
-  TrendingUp,
-  MapPin,
-  MessageCircle,
   Gift,
-  Star,
-  Coffee,
-  Moon,
-  Sun,
-  Quote,
-  Calendar,
-  Music,
-  Flower2,
-  Rainbow,
   Crown,
   Gem,
-  Zap
+  Mountain,
+  Utensils,
+  Users,
+  Building,
+  Quote,
+  Timer
 } from "lucide-react";
 import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
-import BirthdaySurprise from "@/components/BirthdaySurprise";
-import DashboardCard from "@/components/DashboardCard";
-import StatsCard from "@/components/StatsCard";
-import AchievementCard from "@/components/AchievementCard";
 import MemoryGallery from "@/components/MemoryGallery";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-const Index = () => {
-  const [sweetMomentsCount] = useState(47);
-  const [chapatiDebt] = useState(3);
-  const [memoriesCount] = useState(12);
-  const [showMainApp, setShowMainApp] = useState(true);
-  const [isVisible, setIsVisible] = useState(false);
-  const [currentLoveMessage, setCurrentLoveMessage] = useState(0);
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
 
-  // Heartfelt daily love messages that auto-generate
-  const dailyLoveMessages = [
-    {
-      message: "You make my world brighter just by existing, my beautiful Chikwere 💫",
-      day: "Day 1",
-      mood: "radiant"
-    },
-    {
-      message: "I love your sweet laughter - it's become the melody of my heart 💕",
-      day: "Day 2", 
-      mood: "playful"
-    },
-    {
-      message: "Your ugali was perfect, but you're infinitely more perfect than any meal 🥰",
-      day: "Day 3",
-      mood: "proud"
-    },
-    {
-      message: "I can't wait to teach baby Alpha to say 'mama' in your sweet voice 👶✨",
-      day: "Day 4",
-      mood: "dreamy"
-    },
-    {
-      message: "Every moment with you feels like I'm living in a beautiful dream 🌙💙",
-      day: "Day 5",
-      mood: "romantic"
-    },
-    {
-      message: "Your smile is my favorite work of art, painted fresh every morning 🎨💚",
-      day: "Day 6",
-      mood: "artistic"
-    },
-    {
-      message: "In your eyes, I see our entire future filled with love and happiness ✨",
-      day: "Day 7",
-      mood: "dreamy"
-    },
-    {
-      message: "Your gentle touch has the power to heal any wound in my soul 💖",
-      day: "Day 8",
-      mood: "tender"
-    }
-  ];
+const Index = () => {
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Calculate time until her birthday (tomorrow)
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(0, 0, 0, 0);
+      
+      const difference = tomorrow.getTime() - now.getTime();
+      
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        
+        setTimeLeft({ days, hours, minutes, seconds });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+    
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     setIsVisible(true);
-    
-    // Auto-cycle through love messages every 5 seconds
-    const messageInterval = setInterval(() => {
-      setCurrentLoveMessage(prev => (prev + 1) % dailyLoveMessages.length);
-    }, 5000);
-
-    return () => clearInterval(messageInterval);
   }, []);
 
-  const handleBirthdayComplete = () => {
-    setShowMainApp(true);
-  };
-
-  // Show birthday surprise gate until completed
-  if (!showMainApp) {
-    return <BirthdaySurprise onComplete={handleBirthdayComplete} />;
-  }
+  const bucketListItems = [
+    { icon: Mountain, title: "Taking a hike with Chikwere", mood: "adventurous" },
+    { icon: Coffee, title: "Having a morning run with my beautiful Mama Alpha", mood: "energetic" },
+    { icon: Star, title: "Having late night out with my winsome woman", mood: "romantic" },
+    { icon: Heart, title: "Planning to have the awaited Alpha", mood: "dreamy" },
+    { icon: Sparkles, title: "Accompanying my lovely wife to the salon and me to the barber shop", mood: "caring" },
+    { icon: Building, title: "Having a serious business talk with my Mrs CEO", mood: "ambitious" },
+    { icon: Utensils, title: "My chef to cook me her famous chapatis", mood: "loving" },
+    { icon: Users, title: "Partying with her", mood: "joyful" }
+  ];
 
   const getMoodGradient = (mood: string) => {
     switch (mood) {
-      case "radiant": return "from-primary/25 to-accent/20";
-      case "playful": return "from-accent/20 to-primary/15";
-      case "proud": return "from-primary/20 to-secondary/20";
-      case "dreamy": return "from-accent/15 to-primary/20";
-      case "romantic": return "from-primary/30 to-accent/25";
-      case "artistic": return "from-secondary/20 to-primary/15";
-      case "tender": return "from-primary/25 to-secondary/20";
-      default: return "from-primary/20 to-accent/15";
+      case "adventurous": return "from-green-400/20 to-blue-400/20";
+      case "energetic": return "from-orange-400/20 to-yellow-400/20";
+      case "romantic": return "from-pink-400/20 to-purple-400/20";
+      case "dreamy": return "from-blue-400/20 to-indigo-400/20";
+      case "caring": return "from-emerald-400/20 to-teal-400/20";
+      case "ambitious": return "from-violet-400/20 to-purple-400/20";
+      case "loving": return "from-red-400/20 to-pink-400/20";
+      case "joyful": return "from-yellow-400/20 to-orange-400/20";
+      default: return "from-primary/20 to-accent/20";
     }
   };
 
   return (
     <div className="min-h-screen bg-background love-particles">
       <Header />
-      <HeroSection />
       
-      {/* Magical Welcome Message - The Love Letter Comes Alive */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 hero-magic-gradient opacity-10"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center max-w-5xl mx-auto">
-            <div className="glass-morphism p-16 rounded-3xl love-card interactive-love-card">
-              <div className="animate-heartFloat mb-8">
-                <Crown className="w-16 h-16 mx-auto text-primary animate-loveGlow" />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-8 leading-relaxed">
-                My Dearest Chikwere, Future Mama Alpha 👑
-              </h2>
-              <Quote className="w-12 h-12 mx-auto mb-8 text-accent animate-gentlePulse" />
-              <blockquote className="text-xl md:text-2xl font-display font-medium text-foreground mb-10 leading-relaxed italic">
-                "This digital sanctuary is dedicated to YOU - the woman who transforms ordinary moments into extraordinary memories.
-                From your triumphant ugali mastery that filled my heart with pride, to every sweet 
-                <span className="heartfelt-highlight mx-2 animate-sparkle">smile</span> 
-                that lights up my world like sunshine, you are my everything.
-                <br /><br />
-                Welcome to our story, my beloved future wife.
-                <br />
-                Welcome to our dreams, future mother of Alpha.
-                <br />
-                Welcome to forever, my heart's home."
-              </blockquote>
-              <div className="flex items-center justify-center gap-3 text-muted-foreground">
-                <Heart className="w-6 h-6 text-primary fill-primary animate-heartBeat" />
-                <span className="font-display text-lg italic">With endless love, until the stars forget to shine</span>
-                <Heart className="w-6 h-6 text-primary fill-primary animate-heartBeat" />
-              </div>
-              <div className="mt-8">
-                <p className="text-primary font-semibold text-lg">- Your Forever Mr. Yegon 💙</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Auto-Generating Daily Love Letters */}
-      <section className="py-16 bg-gradient-to-b from-background to-secondary/5">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <Badge variant="secondary" className="mb-4 px-8 py-3">
-              <MessageCircle className="w-5 h-5 mr-2" />
-              Daily Love Letters
-            </Badge>
-            <h2 className="text-4xl font-display font-bold text-foreground mb-4">
-              Messages From My Heart to Yours
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Every day brings a new reason to fall deeper in love with you
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className={`love-card interactive-love-card bg-gradient-to-br ${getMoodGradient(dailyLoveMessages[currentLoveMessage].mood)} transition-all duration-1000`}>
-              <div className="text-center p-8">
-                <div className="flex items-center justify-center gap-2 mb-6">
-                  <Gem className="w-6 h-6 text-primary animate-sparkle" />
-                  <span className="text-primary font-semibold text-lg">
-                    {dailyLoveMessages[currentLoveMessage].day}
-                  </span>
-                  <Gem className="w-6 h-6 text-primary animate-sparkle" />
-                </div>
-                <p className="text-2xl font-display font-medium text-foreground leading-relaxed mb-6">
-                  {dailyLoveMessages[currentLoveMessage].message}
-                </p>
-                <div className="flex justify-center gap-2">
-                  {dailyLoveMessages.map((_, index) => (
-                    <div
-                      key={index}
-                      className={`w-3 h-3 rounded-full transition-all duration-500 ${
-                        index === currentLoveMessage 
-                          ? 'bg-primary scale-125' 
-                          : 'bg-primary/30'
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Enhanced Stats Overview with Emotional Impact */}
-      <section className="py-24 relative overflow-hidden">
+      {/* Hero Section - Romantic Welcome */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 hero-magic-gradient opacity-20"></div>
         <div className="absolute inset-0 floating-hearts opacity-5"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className={`text-center mb-20 ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}>
-            <Badge variant="secondary" className="mb-6 px-8 py-3 text-base font-medium">
-              <Rainbow className="w-5 h-5 mr-2" />
-              Our Love Story in Sacred Numbers
-            </Badge>
-            <h2 className="text-6xl font-display font-bold text-foreground mb-8 leading-tight">
-              Every Heartbeat 
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Tells Our Story</span>
-            </h2>
-            <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
-              Each number holds the weight of our love, each statistic carries the warmth of a thousand embraces, 
-              and every count represents another beautiful chapter in our eternal romance
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-            <div className="stagger-love-animation" style={{ animationDelay: '0.1s' }}>
-              <StatsCard 
-                title="Sweet Moments"
-                value={sweetMomentsCount}
-                subtitle="Pure magic captured ✨💫"
-                icon={Sparkles}
-                className="love-card interactive-love-card shadow-romantic-glow"
-              />
+        
+        <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
+          <div className={`${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}>
+            <div className="animate-heartFloat mb-8">
+              <Crown className="w-20 h-20 mx-auto text-primary animate-loveGlow" />
             </div>
-            <div className="stagger-love-animation" style={{ animationDelay: '0.2s' }}>
-              <StatsCard 
-                title="Precious Memories"
-                value={memoriesCount}
-                subtitle="Treasured in our hearts 💎💕"
-                icon={Camera}
-                className="love-card interactive-love-card shadow-gentle-lift"
-              />
+            
+            <h1 className="text-6xl md:text-8xl font-display font-bold mb-8 leading-tight">
+              My Beloved{" "}
+              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-sparkle">
+                Chikwere
+              </span>
+            </h1>
+            
+            <div className="space-y-4 text-2xl md:text-3xl text-muted-foreground mb-12">
+              <p className="font-light">My Beautiful Mama Alpha</p>
+              <p className="font-light">My Radiant Moonlight</p>
+              <p className="font-light">My Precious Chemu</p>
             </div>
-            <div className="stagger-love-animation" style={{ animationDelay: '0.3s' }}>
-              <StatsCard 
-                title="Chapati Promise"
-                value={chapatiDebt}
-                subtitle="Worth every sweet wait 🥰🍽️"
-                icon={ChefHat}
-                className="love-card interactive-love-card shadow-romantic-glow"
-              />
-            </div>
-            <div className="stagger-love-animation" style={{ animationDelay: '0.4s' }}>
-              <StatsCard 
-                title="Dreams Together"
-                value="∞"
-                subtitle="Including our baby Alpha 👶💙"
-                icon={Baby}
-                className="love-card interactive-love-card shadow-gentle-lift"
-              />
+            
+            <div className="glass-morphism p-8 rounded-3xl max-w-4xl mx-auto mb-12">
+              <Quote className="w-12 h-12 mx-auto mb-6 text-accent animate-gentlePulse" />
+              <p className="text-xl md:text-2xl font-display font-medium leading-relaxed italic">
+                "From baby class to this beautiful moment - you've been the girl of my dreams for nearly a decade. 
+                My childhood crush who became my everything. Tomorrow you turn 19, and I can't wait to celebrate 
+                the incredible woman you've become."
+              </p>
+              <div className="mt-6 flex items-center justify-center gap-3">
+                <Heart className="w-6 h-6 text-primary fill-primary animate-heartBeat" />
+                <span className="text-lg font-semibold text-primary">4 Beautiful Months Together</span>
+                <Heart className="w-6 h-6 text-primary fill-primary animate-heartBeat" />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Interactive Photo Gallery - Moments That Matter */}
-      <section className="py-24 bg-gradient-to-br from-secondary/5 to-background">
+      {/* Birthday Countdown */}
+      <section className="py-24 bg-gradient-to-br from-primary/5 to-accent/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge variant="secondary" className="mb-6 px-8 py-3">
-              <Camera className="w-5 h-5 mr-2" />
-              Moments That Matter
+              <Gift className="w-5 h-5 mr-2" />
+              Birthday Countdown
             </Badge>
             <h2 className="text-5xl font-display font-bold text-foreground mb-6">
-              Our <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Memory Palace</span>
+              Your Special Day is{" "}
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Almost Here!
+              </span>
             </h2>
             <p className="text-muted-foreground text-xl max-w-3xl mx-auto">
-              Each photograph captures a universe of emotions, every smile tells a story of our infinite love, 
-              and every moment preserved here is a treasure beyond measure
+              Counting every precious moment until we celebrate your 19th birthday, my beautiful Chikwere
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto glass-morphism p-12 rounded-3xl">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="text-6xl font-bold text-primary mb-2 animate-pulse">{timeLeft.days}</div>
+                <div className="text-sm text-muted-foreground uppercase tracking-wider">Days</div>
+              </div>
+              <div className="text-center">
+                <div className="text-6xl font-bold text-accent mb-2 animate-pulse">{timeLeft.hours}</div>
+                <div className="text-sm text-muted-foreground uppercase tracking-wider">Hours</div>
+              </div>
+              <div className="text-center">
+                <div className="text-6xl font-bold text-primary mb-2 animate-pulse">{timeLeft.minutes}</div>
+                <div className="text-sm text-muted-foreground uppercase tracking-wider">Minutes</div>
+              </div>
+              <div className="text-center">
+                <div className="text-6xl font-bold text-accent mb-2 animate-pulse">{timeLeft.seconds}</div>
+                <div className="text-sm text-muted-foreground uppercase tracking-wider">Seconds</div>
+              </div>
+            </div>
+            
+            <div className="text-center mt-8">
+              <p className="text-2xl font-display text-foreground">
+                Until my queen turns <span className="text-primary font-bold">19</span>! 🎉
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Memory Gallery */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16">
+            <Badge variant="secondary" className="mb-6 px-8 py-3">
+              <Camera className="w-5 h-5 mr-2" />
+              Our Beautiful Memories
+            </Badge>
+            <h2 className="text-5xl font-display font-bold text-foreground mb-6">
+              Captured <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Moments</span>
+            </h2>
+            <p className="text-muted-foreground text-xl max-w-3xl mx-auto">
+              Every photograph tells the story of our love, every smile captures a universe of emotions
             </p>
           </div>
 
@@ -296,171 +207,141 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Learning Together Game Zone */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5"></div>
-        <div className="container mx-auto px-4 relative z-10">
+      {/* Poetry Dedication Section */}
+      <section className="py-24 bg-gradient-to-br from-secondary/5 to-background">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge variant="secondary" className="mb-6 px-8 py-3">
-              <GraduationCap className="w-5 h-5 mr-2" />
-              Growing Together
+              <BookOpen className="w-5 h-5 mr-2" />
+              Poetry Corner
             </Badge>
             <h2 className="text-5xl font-display font-bold text-foreground mb-6">
-              Learning & <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Loving Together</span>
+              Words from <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">My Heart</span>
             </h2>
-            <p className="text-muted-foreground text-xl max-w-3xl mx-auto">
-              Every skill learned hand in hand, every challenge overcome together, 
-              makes our bond stronger and our love deeper
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            
-            {/* Word Challenge Game */}
-            <DashboardCard
-              title="Word Challenge Adventure"
-              description="Master beautiful words like 'catechism' together, turning learning into a loving game filled with laughter and discovery."
-              icon={BookOpen}
-              actionText="Start Learning Together"
-              className="love-card interactive-love-card shadow-romantic-glow"
-            >
-              <div className="space-y-4">
-                <div className="glass-morphism p-4 rounded-xl">
-                  <p className="text-lg font-semibold text-primary mb-2">Today's Word: "Catechism"</p>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    "Learning this beautiful word together, just like we learn life together 💕"
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                    <span className="text-sm">Pronunciation mastered with love!</span>
-                  </div>
-                </div>
-                <Badge variant="outline" className="w-full justify-center py-2">
-                  <Trophy className="w-4 h-4 mr-2" />
-                  Learning Level: Advanced Lover 💙
-                </Badge>
+          <div className="max-w-4xl mx-auto">
+            <div className="love-card interactive-love-card text-center p-16">
+              <div className="animate-heartFloat mb-8">
+                <Quote className="w-16 h-16 mx-auto text-primary animate-loveGlow" />
               </div>
-            </DashboardCard>
-
-            {/* Cooking Achievements */}
-            <DashboardCard
-              title="Culinary Love Journey"
-              description="From that triumphant ugali victory to future chapati mastery - every dish is seasoned with love and pride."
-              icon={ChefHat}
-              actionText="Unlock New Recipes"
-              className="love-card interactive-love-card shadow-gentle-lift"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/10 border border-primary/20">
-                  <Trophy className="w-5 h-5 text-primary" />
-                  <div>
-                    <p className="text-sm font-medium">Ugali Master Achievement</p>
-                    <p className="text-xs text-muted-foreground">Unlocked with pride and joy! 🏆</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-accent/10 border border-accent/20">
-                  <Clock className="w-5 h-5 text-accent-foreground" />
-                  <div>
-                    <p className="text-sm font-medium">Chapati Challenge: Coming Soon</p>
-                    <p className="text-xs text-muted-foreground">The most anticipated masterpiece 🥞</p>
-                  </div>
+              
+              <h3 className="text-3xl font-display font-bold text-foreground mb-8">
+                A Special Poem Awaits
+              </h3>
+              
+              <div className="glass-morphism p-8 rounded-2xl mb-8">
+                <p className="text-xl text-muted-foreground leading-relaxed mb-6">
+                  I've written something special just for you, my beloved Chikwere. 
+                  Words that capture the depth of my love, the beauty of our journey, 
+                  and the dreams we share for our future together.
+                </p>
+                
+                <div className="flex items-center justify-center gap-2 text-primary">
+                  <Heart className="w-5 h-5 fill-primary animate-heartBeat" />
+                  <span className="font-semibold">To be personally delivered with all my love</span>
+                  <Heart className="w-5 h-5 fill-primary animate-heartBeat" />
                 </div>
               </div>
-            </DashboardCard>
-
-            {/* Life Skills Adventure */}
-            <DashboardCard
-              title="Life Skills Adventure"
-              description="From axe-wielding confidence to daily life mastery - we're building an unstoppable team of love and capability."
-              icon={Target}
-              actionText="Explore New Skills"
-              className="love-card interactive-love-card shadow-romantic-glow"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/20">
-                  <Zap className="w-5 h-5 text-primary" />
-                  <div>
-                    <p className="text-sm font-medium">Confidence Building</p>
-                    <p className="text-xs text-muted-foreground">Growing stronger every day 💪</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-                  <Heart className="w-5 h-5 text-primary fill-primary" />
-                  <div>
-                    <p className="text-sm font-medium">Love & Life Balance</p>
-                    <p className="text-xs text-muted-foreground">Perfect harmony achieved 💕</p>
-                  </div>
-                </div>
-              </div>
-            </DashboardCard>
+              
+              <p className="text-lg font-display italic text-muted-foreground">
+                "Some words are too precious for screens - they deserve to be whispered, 
+                shared in the warmth of your presence, where every syllable can dance 
+                between us like the love we've nurtured for all these years."
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Our Future Dreams Vision Board */}
+      {/* Bucket List Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 magical-gradient opacity-10"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <Badge variant="secondary" className="mb-6 px-8 py-3">
-              <Target className="w-5 h-5 mr-2" />
-              Our Beautiful Future
+              <MapPin className="w-5 h-5 mr-2" />
+              Our Pending Adventures
             </Badge>
             <h2 className="text-5xl font-display font-bold text-foreground mb-6">
-              Dreams Painted with 
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Hope & Love</span>
+              Dreams Waiting to <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Come True</span>
             </h2>
             <p className="text-muted-foreground text-xl max-w-3xl mx-auto">
-              Every dream we share becomes a star in our constellation of love, 
-              guiding us toward a future brighter than we ever imagined possible
+              Every adventure we'll share, every moment we'll create, every dream we'll make reality together
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            
-            {/* Baby Alpha Dreams */}
-            <div className="stagger-love-animation" style={{ animationDelay: '0.1s' }}>
-              <AchievementCard
-                title="Welcome Baby Alpha 👶"
-                description="Our hearts expanding, our love multiplying, as we prepare to welcome the most beautiful embodiment of our love into this world."
-                icon={Baby}
-                isCompleted={false}
-                progress={0}
-                maxProgress={1}
-                className="love-card interactive-love-card shadow-gentle-lift"
-              />
-            </div>
-            
-            {/* Dream Home */}
-            <div className="stagger-love-animation" style={{ animationDelay: '0.2s' }}>
-              <AchievementCard
-                title="Our Forever Home 🏡"
-                description="Building a sanctuary where love lives, dreams grow, and every room echoes with laughter and joy."
-                icon={Heart}
-                isCompleted={false}
-                progress={0}
-                maxProgress={1}
-                className="love-card interactive-love-card shadow-romantic-glow"
-              />
-            </div>
-            
-            {/* Adventure Together */}
-            <div className="stagger-love-animation" style={{ animationDelay: '0.3s' }}>
-              <AchievementCard
-                title="Chikwere Nature Adventure 🌲"
-                description="Walking among trees, breathing in freedom, letting nature witness our love in its purest form."
-                icon={MapPin}
-                isCompleted={false}
-                progress={0}
-                maxProgress={1}
-                className="love-card interactive-love-card shadow-gentle-lift"
-              />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {bucketListItems.map((item, index) => (
+              <div
+                key={index}
+                className={`love-card interactive-love-card bg-gradient-to-br ${getMoodGradient(item.mood)} stagger-love-animation`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="text-center">
+                  <div className="animate-heartFloat mb-6">
+                    <item.icon className="w-10 h-10 mx-auto text-primary animate-loveGlow" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground mb-4 leading-relaxed">
+                    {item.title}
+                  </h3>
+                  <div className="flex items-center justify-center">
+                    <Clock className="w-4 h-4 text-muted-foreground mr-2" />
+                    <span className="text-sm text-muted-foreground">Coming Soon</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Special Achievement Section */}
+      <section className="py-24 bg-gradient-to-br from-accent/5 to-primary/5">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <Badge variant="secondary" className="mb-6 px-8 py-3">
+              <Trophy className="w-5 h-5 mr-2" />
+              Celebrating Your Growth
+            </Badge>
+            <h2 className="text-5xl font-display font-bold text-foreground mb-6">
+              The Ugali <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Master</span>
+            </h2>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="love-card interactive-love-card text-center p-12">
+              <div className="animate-heartFloat mb-8">
+                <Utensils className="w-16 h-16 mx-auto text-primary animate-loveGlow" />
+              </div>
+              
+              <h3 className="text-3xl font-display font-bold text-foreground mb-6">
+                My Beautiful Chef Chikwere
+              </h3>
+              
+              <div className="glass-morphism p-8 rounded-2xl">
+                <p className="text-xl text-foreground leading-relaxed mb-6">
+                  Watching you learn to cook ugali filled my heart with so much pride and joy. 
+                  Every stir, every careful moment, every determined look on your beautiful face - 
+                  it all reminded me why I fell in love with your spirit.
+                </p>
+                
+                <div className="flex items-center justify-center gap-2 text-primary mb-4">
+                  <Star className="w-5 h-5 fill-primary" />
+                  <span className="font-semibold text-lg">Achievement Unlocked: Ugali Mastery!</span>
+                  <Star className="w-5 h-5 fill-primary" />
+                </div>
+                
+                <p className="text-lg font-display italic text-muted-foreground">
+                  "From learning to cook to conquering hearts - you're unstoppable, my love"
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Emotional Closing - The Promise */}
+      {/* Final Love Declaration */}
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 floating-hearts"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-accent/10"></div>
@@ -469,33 +350,35 @@ const Index = () => {
             <div className="animate-heartFloat mb-12">
               <Heart className="w-24 h-24 mx-auto text-primary animate-heartBeat fill-primary heart-glow" />
             </div>
+            
             <h2 className="text-6xl md:text-7xl font-display font-bold text-foreground mb-10 leading-tight">
               Forever & Always,
               <br />
               <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                In Our Little World
+                My Chikwere
               </span>
             </h2>
+            
             <p className="text-muted-foreground text-2xl md:text-3xl mb-16 leading-relaxed max-w-4xl mx-auto">
-              In this sacred digital space where love blooms eternal, where every 
-              <span className="heartfelt-highlight mx-2">smile</span> 
-              moment becomes a prayer of gratitude, and where two hearts beat as one beautiful symphony. 
-              This is our sanctuary, our love letter to the universe, our promise to forever choose each other.
+              From baby class dreams to this beautiful reality - you are my past, my present, 
+              and my future. Happy early 19th birthday to the queen of my heart.
             </p>
+            
             <div className="space-y-8">
               <div className="flex items-center justify-center gap-6 text-muted-foreground">
                 <Sparkles className="w-8 h-8 text-primary animate-sparkle" />
                 <span className="text-xl font-display font-medium italic">
-                  "With endless love, until the stars forget to shine"
+                  "Nearly a decade of loving you, and forever more to go"
                 </span>
                 <Sparkles className="w-8 h-8 text-primary animate-sparkle" />
               </div>
+              
               <div className="text-center">
                 <p className="text-2xl font-display font-bold text-primary">
                   Made with infinite love for my Chikwere 💙💚✨
                 </p>
                 <p className="text-lg text-muted-foreground mt-2">
-                  Future mama of Alpha, queen of my heart, bringer of smiles
+                  My Mama Alpha, my Moonlight, my Chemu, my everything
                 </p>
               </div>
             </div>
