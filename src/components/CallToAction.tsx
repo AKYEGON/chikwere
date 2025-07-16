@@ -32,7 +32,7 @@ const CallToAction = () => {
         </div>
         
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <Link to="/countdown">
+          <Link to="/">
             <Button variant="romantic" size="lg" className="px-8 py-4 text-xl">
               <Calendar className="w-6 h-6 mr-3" />
               See Birthday Countdown
