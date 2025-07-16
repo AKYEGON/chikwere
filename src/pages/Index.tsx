@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import BirthdaySurprise from "@/components/BirthdaySurprise";
 import DashboardCard from "@/components/DashboardCard";
 import StatsCard from "@/components/StatsCard";
 import AchievementCard from "@/components/AchievementCard";
@@ -30,6 +31,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <BirthdaySurprise />
       <HeroSection />
       
       {/* Stats Overview */}
