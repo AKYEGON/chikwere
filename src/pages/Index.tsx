@@ -169,37 +169,83 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             <AchievementCard
-              title="Ugali Master Chef"
-              description="Successfully conquered the art of making perfect ugali! A true culinary triumph that deserves celebration."
+              title="Learning to Cook Ugali"
+              description="She learned to cook ugali and I truly appreciate her effort and success!"
               icon={ChefHat}
               isCompleted={true}
               completedDate="Recently"
             />
             
             <AchievementCard
-              title="Chapati Promise Keeper"
-              description="Working towards fulfilling those promised chapatis. Current debt needs attention!"
+              title="Taking a Hike with Chikwere"
+              description="Planning our adventure hike together in nature"
+              icon={Target}
+              isCompleted={false}
+              progress={0}
+              maxProgress={1}
+            />
+            
+            <AchievementCard
+              title="Morning Run with Beautiful Mama Alpha"
+              description="Having energizing morning runs together"
+              icon={Heart}
+              isCompleted={false}
+              progress={0}
+              maxProgress={1}
+            />
+            
+            <AchievementCard
+              title="Late Night Out with My Winsome Woman"
+              description="Planning romantic late night adventures together"
+              icon={Sparkles}
+              isCompleted={false}
+              progress={0}
+              maxProgress={1}
+            />
+            
+            <AchievementCard
+              title="Planning for the Awaited Alpha"
+              description="Our future baby Alpha - planning and preparing for this blessing"
+              icon={Baby}
+              isCompleted={false}
+              progress={0}
+              maxProgress={1}
+            />
+            
+            <AchievementCard
+              title="Salon & Barber Shop Date"
+              description="Accompanying my lovely wife to the salon while I go to the barber shop"
+              icon={Camera}
+              isCompleted={false}
+              progress={0}
+              maxProgress={1}
+            />
+            
+            <AchievementCard
+              title="Serious Business Talk with Mrs CEO"
+              description="Having important business discussions with my entrepreneurial partner"
               icon={Trophy}
               isCompleted={false}
               progress={0}
-              maxProgress={3}
+              maxProgress={1}
             />
             
             <AchievementCard
-              title="Vocabulary Explorer"
-              description="Learning new words together, starting with 'catechism' and expanding our knowledge."
-              icon={BookOpen}
-              isCompleted={true}
-              completedDate="This week"
-            />
-            
-            <AchievementCard
-              title="Life Skills Adventurer"
-              description="Mastering practical skills including the proper and safe use of an axe."
-              icon={Axe}
+              title="Famous Chapatis from My Chef"
+              description="Waiting for my chef to cook me her famous chapatis"
+              icon={ChefHat}
               isCompleted={false}
-              progress={1}
-              maxProgress={5}
+              progress={0}
+              maxProgress={1}
+            />
+            
+            <AchievementCard
+              title="Parting with Her"
+              description="Special moments of celebration and joy together"
+              icon={Heart}
+              isCompleted={false}
+              progress={0}
+              maxProgress={1}
             />
           </div>
         </div>
