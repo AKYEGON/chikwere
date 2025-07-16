@@ -41,17 +41,22 @@ All colors MUST be HSL.
     --input: 345 20% 88%;
     --ring: 351 35% 70%;
 
-    /* Romantic gradients */
+    /* Modern gradients */
     --gradient-romantic: linear-gradient(135deg, hsl(351, 35%, 70%), hsl(280, 30%, 88%));
     --gradient-warm: linear-gradient(180deg, hsl(355, 50%, 98%), hsl(345, 25%, 90%));
     --gradient-hero: linear-gradient(135deg, hsl(351, 35%, 75%), hsl(280, 30%, 85%));
-
-    /* Elegant shadows */
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    --gradient-mesh: linear-gradient(135deg, hsl(351, 35%, 70%), hsl(280, 30%, 88%), hsl(220, 30%, 85%));
+    
+    /* Modern shadows with depth */
     --shadow-romantic: 0 10px 30px -10px hsl(351, 35%, 70%, 0.3);
     --shadow-soft: 0 5px 20px -5px hsl(280, 30%, 88%, 0.4);
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    --shadow-elevated: 0 20px 40px -12px hsl(351, 35%, 70%, 0.4);
 
     /* Smooth transitions */
     --transition-romantic: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 1rem;
 
@@ -160,16 +165,51 @@ All colors MUST be HSL.
     transition: var(--transition-romantic);
   }
 
+  /* Modern card styles */
   .love-card {
-    @apply bg-card border border-border rounded-2xl p-6 shadow-soft transition-romantic hover:shadow-romantic hover:scale-105;
+    @apply bg-card/60 backdrop-blur-sm border border-border/50 rounded-3xl p-8 shadow-glass transition-romantic hover:shadow-elevated hover:scale-105 hover:bg-card/80;
+  }
+
+  .glass-card {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .mesh-gradient {
+    background: var(--gradient-mesh);
+    background-size: 300% 300%;
+    animation: mesh-move 8s ease-in-out infinite;
   }
 
   .waah-highlight {
-    @apply bg-gradient-to-r from-primary/20 to-accent/20 px-3 py-1 rounded-full text-sm font-medium;
+    @apply bg-gradient-to-r from-primary/30 to-accent/30 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm border border-primary/20;
   }
 
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
+  .interactive-card {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-elevated cursor-pointer group;
+  }
+
+  .stagger-animation {
+    animation: staggerIn 0.6s ease-out backwards;
+  }
+
+  /* Enhanced animations */
+  @keyframes mesh-move {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes staggerIn {
+    from {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
 
   @keyframes float {
@@ -177,18 +217,14 @@ All colors MUST be HSL.
       transform: translateY(0px) rotate(0deg);
     }
     50% {
-      transform: translateY(-10px) rotate(180deg);
+      transform: translateY(-15px) rotate(5deg);
     }
-  }
-
-  .animate-fade-in-up {
-    animation: fadeInUp 1s ease-out;
   }
 
   @keyframes fadeInUp {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(40px);
     }
     to {
       opacity: 1;
@@ -196,23 +232,10 @@ All colors MUST be HSL.
     }
   }
 
-  .animate-scale-in {
-    animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
-  }
-
-  .animate-gradient {
-    animation: gradient 3s ease infinite;
-    background-size: 400% 400%;
-  }
-
   @keyframes scaleIn {
     from {
       opacity: 0;
-      transform: scale(0.8) translateY(20px);
+      transform: scale(0.8) translateY(30px);
     }
     to {
       opacity: 1;
@@ -222,10 +245,10 @@ All colors MUST be HSL.
 
   @keyframes glow {
     from {
-      box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+      box-shadow: 0 0 30px rgba(236, 72, 153, 0.4);
     }
     to {
-      box-shadow: 0 0 30px rgba(236, 72, 153, 0.6), 0 0 40px rgba(168, 85, 247, 0.4);
+      box-shadow: 0 0 50px rgba(236, 72, 153, 0.8), 0 0 70px rgba(168, 85, 247, 0.5);
     }
   }
 
@@ -239,5 +262,42 @@ All colors MUST be HSL.
     100% {
       background-position: 0% 50%;
     }
+  }
+
+  /* Scroll-triggered animations */
+  .scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-animate.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Particle background */
+  .particles {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .particles::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle at 25% 25%, rgba(236, 72, 153, 0.1) 1px, transparent 1px),
+                      radial-gradient(circle at 75% 75%, rgba(168, 85, 247, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: particle-float 20s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes particle-float {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-100px); }
   }
 }

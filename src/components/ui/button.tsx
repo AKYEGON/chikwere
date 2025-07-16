@@ -19,7 +19,9 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         romantic: "romantic-gradient text-primary-foreground shadow-romantic hover:shadow-soft hover:scale-105 transition-romantic",
-        waah: "bg-gradient-to-r from-primary to-accent text-primary-foreground hover:from-primary/90 hover:to-accent/90 shadow-soft hover:shadow-romantic transition-romantic"
+        waah: "bg-gradient-to-r from-primary to-accent text-primary-foreground hover:from-primary/90 hover:to-accent/90 shadow-soft hover:shadow-romantic transition-romantic animate-glow",
+        glass: "glass-card text-foreground hover:bg-white/20 backdrop-blur-md border border-white/20 shadow-glass hover:shadow-elevated transition-all duration-300",
+        floating: "bg-primary text-primary-foreground shadow-elevated hover:shadow-romantic hover:scale-110 transition-bounce animate-float"
       },
       size: {
         default: "h-10 px-4 py-2",
