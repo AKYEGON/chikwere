@@ -18,7 +18,8 @@ import {
   Users,
   Building,
   Quote,
-  Timer
+  Timer,
+  Trophy
 } from "lucide-react";
 import Header from "@/components/Header";
 import MemoryGallery from "@/components/MemoryGallery";
