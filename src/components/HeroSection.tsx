@@ -1,6 +1,6 @@
 import { Heart, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-romantic.jpg";
+const heroImage = "/lovable-uploads/e4a19364-5d07-4efa-a090-43818c662e3a.png";
 
 const HeroSection = () => {
   return (

@@ -18,6 +18,7 @@ import HeroSection from "@/components/HeroSection";
 import DashboardCard from "@/components/DashboardCard";
 import StatsCard from "@/components/StatsCard";
 import AchievementCard from "@/components/AchievementCard";
+import MemoryGallery from "@/components/MemoryGallery";
 import { Button } from "@/components/ui/button";
 import cookingImage from "@/assets/cooking-illustration.jpg";
 
@@ -84,19 +85,12 @@ const Index = () => {
             {/* Memory Gallery */}
             <DashboardCard
               title="Memory Gallery"
-              description="Our most precious moments captured in time. Upload new photos and relive our beautiful journey together."
+              description="Our most precious moments captured in time. Each photo is a Waah moment worth treasuring forever."
               icon={Camera}
               actionText="Add New Memory"
               className="xl:col-span-2"
             >
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                <div className="aspect-square bg-muted rounded-lg flex items-center justify-center">
-                  <Camera className="w-8 h-8 text-muted-foreground" />
-                </div>
-                <div className="aspect-square bg-muted rounded-lg flex items-center justify-center">
-                  <Heart className="w-8 h-8 text-muted-foreground" />
-                </div>
-              </div>
+              <MemoryGallery />
             </DashboardCard>
 
             {/* Daily Love Notes */}
