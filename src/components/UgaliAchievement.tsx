@@ -1,5 +1,5 @@
 
-import { Trophy, Star, Chef, Heart } from "lucide-react";
+import { Trophy, Star, ChefHat, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const UgaliAchievement = () => {
@@ -13,7 +13,7 @@ const UgaliAchievement = () => {
         
         <div className="space-y-6">
           <div className="bg-gradient-to-br from-yellow-50/50 to-orange-50/50 rounded-2xl p-8 border border-yellow-200/30">
-            <Chef className="w-16 h-16 mx-auto mb-6 text-orange-500" />
+            <ChefHat className="w-16 h-16 mx-auto mb-6 text-orange-500" />
             <h3 className="text-3xl font-bold text-gray-800 mb-4">
               Master Chef: Ugali Edition
             </h3>
