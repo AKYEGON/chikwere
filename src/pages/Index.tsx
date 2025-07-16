@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { 
   Camera, 
@@ -21,17 +22,25 @@ import StatsCard from "@/components/StatsCard";
 import AchievementCard from "@/components/AchievementCard";
 import MemoryGallery from "@/components/MemoryGallery";
 import { Button } from "@/components/ui/button";
-import cookingImage from "@/assets/cooking-illustration.jpg";
 
 const Index = () => {
-  const [waahCount] = useState(47); // This could be dynamic
+  const [waahCount] = useState(47);
   const [chapatiDebt] = useState(3);
   const [memoriesCount] = useState(12);
+  const [showMainApp, setShowMainApp] = useState(false);
+
+  const handleBirthdayComplete = () => {
+    setShowMainApp(true);
+  };
+
+  // Show birthday surprise gate until completed
+  if (!showMainApp) {
+    return <BirthdaySurprise onComplete={handleBirthdayComplete} />;
+  }
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <BirthdaySurprise />
       <HeroSection />
       
       {/* Stats Overview */}
